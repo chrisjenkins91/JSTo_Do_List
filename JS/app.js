@@ -16,7 +16,6 @@ taskButton.addEventListener("click", () => {
     let removeButton = document.createElement("button");
 
     let displayList = document.querySelector(".taskList");
-    console.log(displayList)
     
     //* Added a class for the task the user inputs
     checkbox.classList.add("task")
@@ -24,8 +23,10 @@ taskButton.addEventListener("click", () => {
     //* Set attribute to button to give consistency for buttons in the list
     removeButton.setAttribute("type", "button")
 
+    listItem.classList.add("list-group-item");
+
     //* Added some classes to the removeButton styling
-    removeButton.classList.add("btn", "btn-small", "ms-1", "btn-warning")
+    removeButton.classList.add("btn", "btn-sm", "ms-1", "btn-danger", "my-1", "text-end")
     
     removeButton.innerText = "Remove Task";
 
@@ -35,9 +36,6 @@ taskButton.addEventListener("click", () => {
     //* Nesting checkbox input element inside of the listItem li
     listItem.append(checkbox);
 
-    //* Adding a button to remove task from list
-    let buttonText = document.createTextNode("Remove Task");
-    checkbox.append(removeButton)
 
     //* Creating a text node for the task input and append it next to the checkbox
     //* Setting .innerText on an input element (checkbox) will not work. Instead, they either have value (for text inputs) or are self-contained (like checkboxes).
@@ -45,10 +43,43 @@ taskButton.addEventListener("click", () => {
     let taskText = document.createTextNode(taskInput);
     listItem.append(taskText);
 
-    //* Appending the compledted listItem (with checkbox and task text) to the displayList ul
-    displayList.append(listItem)
-    
+    listItem.append(removeButton);
 
+    if (taskInput === "") {
+        alert("Please enter a task to complete.")
+        return;
+    }
+
+    let onlyNumbers = /^[0-9]+$/.test(taskInput)
+
+    if (onlyNumbers) {
+        alert("Invalid task. Explain tasks with words.")
+        return;
+    }
+
+    //* Appending the completed listItem (with checkbox and task text) to the displayList ul
+    displayList.append(listItem)
+
+    //* Clear the input field after task is added
+    document.getElementById("addTasks").value = "";
+    
+    //* Created another event listener to remove the list item when clicked
+    removeButton.addEventListener("click", () => {
+        listItem.classList.remove("list-group-item")
+        listItem.remove();
+    })
+
+    //* Another event listener to check if task is completed (checked off)
+    checkbox.addEventListener("change", () => {
+        console.log("Checkbox changed: ", checkbox.checked)
+        if (checkbox.checked) {
+            listItem.style.textDecoration = "line-through"; //change of text style
+            listItem.style.fontFamily = "roboto";
+        } else {
+            listItem.style.textDecoration = "none";
+            listItem.style.fontFamily = "sans-serif";
+        }
+    })
 })
 
 

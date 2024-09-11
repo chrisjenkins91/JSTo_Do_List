@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+
+    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="stylesheet" href="./CSS/bootstrap.css">
+
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1 class="display-3 text-center">To-Do-List</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 d-flex justify-content-center align-items-center">
+                    <label for="task">Create New Task: </label>
+                    <input type="text" id="addTasks"   placeholder="Ex. Take out the dog...">
+                    <button class="btn btn-sm btn-secondary ms-1" id="taskButton">Add Task</button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 displayTasks">
+                    <ul class="taskList">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+<script type="text/javascript" src="./JS/app.js"></script>
+</html>
